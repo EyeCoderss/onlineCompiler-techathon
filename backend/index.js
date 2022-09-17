@@ -39,8 +39,9 @@ async function runCode(snippet) {
 
 }
 app.post("/code", async (req, res) => {
-  lang = req.body.language;
-  code = req.body.code;
+  let lang = req.body.language;
+  let code = req.body.code;
+  let inp = req.body.input || null;
   let ext = "";
   switch (lang) {
     case "c":
@@ -54,16 +55,31 @@ app.post("/code", async (req, res) => {
   }
   try {
     let err = await fs.writeFile("code." + ext, code);
+    if(inp){
+      err = await fs.writeFile("input.txt",inp);
+    }
     let snippet = "";
     switch (lang) {
       case "cpp":
-        snippet = "g++ code.cpp & a.exe";
+        if(inp){
+          snippet = "g++ code.cpp & a.exe < input.txt";
+        }else{
+          snippet = "g++ code.cpp & a.exe";
+        }
         break;
       case "c":
-        snippet = "gcc code.c & a.exe";
+        if(inp){
+          snippet = "gcc code.c & a.exe < input.txt";
+        }else{
+          snippet = "gcc code.c & a.exe";
+        }
         break;
       case "python":
-        snippet = "python code.py";
+        if(inp){
+          snippet = "python code.py < input.txt";
+        }else{
+          snippet = "python code.py";
+        }
         break;
     }
     let codeResult = await runCode(snippet);

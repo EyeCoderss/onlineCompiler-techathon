@@ -1,2 +1,3 @@
-// some comment
-print("hello")
+i = int(input())
+for v in range(i):
+    print("hii")

@@ -85,7 +85,7 @@ Editor{
 }
 .editor-terminal .text-output{
     width:500px;
-    height: 285px;
+    height: 150px;
     /* max-height: 500px;
     max-width: 500px; */
     
@@ -95,3 +95,14 @@ Editor{
     margin:10px;
 }
 
+.editor-terminal .text-input{
+    width:500px;
+    height: 100px;
+    /* max-height: 500px;
+    max-width: 500px; */
+    
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0.9);
+    margin:10px;
+}
