@@ -1,0 +1,97 @@
+body{
+    background-color: lightgreen;
+}
+.dropdown{
+    text-align: center;
+}
+.dropdown-list{
+    background-color: rgba(0, 0, 0, 0.9);
+    color:white;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+.submit{
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.9) ;
+    height: 40px;
+    font-size: 15px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    color:white;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+.submit:hover{
+    background-color: rgba(24, 194, 61, 0.9);
+    transition: .2s ease-out; 
+    transition-delay: 0.2s ;
+
+}
+
+.editor-terminal{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width:100%;
+    /* width:900px; */
+
+    
+}
+
+.editor-terminal .text-editor{
+    width:50%;
+    height: 600px;
+    /* max-width: 700px; */
+    /* max-width: auto; */
+    /* max-height: 500px; */
+    /* max-width: 500px; */
+    margin:10px;
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0.9);
+    margin-right: 5px;
+}
+Editor{
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0.9);
+}
+
+.terminal{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.editor-terminal .text-terminal{
+    width:500px;
+    height: 285px;
+    /* max-height: 500px;
+    max-width: 500px; */
+    
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0.9);
+    margin:10px;
+}
+.editor-terminal .text-output{
+    width:500px;
+    height: 285px;
+    /* max-height: 500px;
+    max-width: 500px; */
+    
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0.9);
+    margin:10px;
+}
+
