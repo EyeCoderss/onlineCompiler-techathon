@@ -4,10 +4,8 @@ const express = require("express");
 const { json } = require("body-parser");
 const morgan = require("morgan");
 const fs = require("fs").promises;
-const port=process.env.PORT || 5000;
-// const { response } = require("express");
-// const { write } = require("node:fs");
 const app = express();
+const port  = process.env.PORT || 5000;
 app.use(morgan("dev"));
 app.use(json());
 app.use((req, res, next) => {
@@ -29,19 +27,16 @@ app.use((req, res, next) => {
   input: string,
 }*/
 async function runCode(snippet) {
-  if(typeof snippet == "string"){
-        const { stdout, stderr } = await exec(snippet);
-        if (stderr != "") {
-        return { status: 404, result: stderr };
-        }
-        return { status: 200, result: stdout };
+  const { stdout, stderr } = await exec(snippet);
+  if (stderr != "") {
+    return { status: 404, result: stderr };
   }
-
+  return { status: 200, result: stdout };
 }
 app.post("/code", async (req, res) => {
-  let lang = req.body.language;
-  let code = req.body.code;
-  let inp = req.body.input || null;
+  lang = req.body.language;
+  code = req.body.code;
+  inp = req.body.input || null;
   let ext = "";
   switch (lang) {
     case "c":
@@ -52,35 +47,44 @@ app.post("/code", async (req, res) => {
       break;
     case "python":
       ext = "py";
+      break;
+    case "java" :
+      ext = "java";
   }
   try {
-    let err = await fs.writeFile("code." + ext, code);
+    let err = await fs.writeFile("/app/code." + ext, code);
     if(inp){
-      err = await fs.writeFile("input.txt",inp);
+      err = await fs.writeFile("/app/input.txt",inp);
     }
     let snippet = "";
     switch (lang) {
       case "cpp":
         if(inp){
-          snippet = "g++ code.cpp & a.exe < input.txt";
+          snippet = "g++ /app/code.cpp && ./a.out < /app/input.txt";
         }else{
-          snippet = "g++ code.cpp & a.exe";
+          snippet = "g++ /app/code.cpp && ./a.out";
         }
         break;
       case "c":
         if(inp){
-          snippet = "gcc code.c & a.exe < input.txt";
+          snippet = "gcc /app/code.c && ./a.out < /app/input.txt";
         }else{
-          snippet = "gcc code.c & a.exe";
+          snippet = "gcc /app/code.c && ./a.out";
         }
         break;
-      case "python":
+      case "python3":
         if(inp){
-          snippet = "python code.py < input.txt";
+          snippet = "python3 /app/code.py < /app/input.txt";
         }else{
-          snippet = "python code.py";
+          snippet = "python3 code.py";
         }
         break;
+      case "java" :
+        if(inp){
+          snippet = "javac /app/code.java && java /app/code.class < input.txt";
+        }else{
+          snippet = "javac /app/code.java && java /app/code.class ";
+        }
     }
     let codeResult = await runCode(snippet);
     res.status(200);
@@ -97,8 +101,3 @@ app.post("/code", async (req, res) => {
 app.listen(port, () => {
   console.log("listening on http://localhost:5000");
 });
-// const ls = spawn("node", ["server"]);
-
-// ls.on("close", (code) => {
-//   console.log(`child process exited with code ${code}`);
-// });
