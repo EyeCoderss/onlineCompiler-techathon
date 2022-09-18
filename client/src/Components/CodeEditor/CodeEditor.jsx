@@ -1,6 +1,7 @@
 import React,{useRef,useState} from "react";
 import './CodeEditor.css';
 import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
+import Navb from "../Navbar/Navb";
 
 function CodeEditor(){
     const [result,setResult]=useState("");
@@ -23,7 +24,7 @@ function CodeEditor(){
     editorRef.current.setValue('');
   }
   function sendData() {
-    fetch('http://localhost:5000/code', {
+    fetch('http://techathon-backend.herokuapp.com/code', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -49,6 +50,7 @@ function CodeEditor(){
     setTheme(e.target.value)
   }
     return(<>
+      <Navb/>
       <div className="code-container">
         <div className="dropdown">
         <select className="dropdown-list" value={theme} onChange={updateTheme}>
@@ -59,7 +61,7 @@ function CodeEditor(){
         <select value={selects} onChange={ setLanguage}className="dropdown-list">
             <option selected value="c">c</option>
             <option value="cpp">c++</option>
-            <option  value="python">python</option>
+            <option  value="python3">python3</option>
         </select>
         <button className="submit" onClick={sendData}>Compile & Run</button>
         </div >

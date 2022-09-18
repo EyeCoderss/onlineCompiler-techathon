@@ -10,14 +10,14 @@ function Navb(){
         <>
           <Navbar bg="dark" variant="dark" className="navbar">
         <Container>
-          <Navbar.Brand href="#home" className="logo">
+          <Navbar.Brand href="/" className="logo">
             eyeCoders
             {/* <img src={mainLogo} alt="logo" className="logoimage"/> */}
             </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Code Editor</Nav.Link>
-            <Nav.Link href="#pricing">Our Team</Nav.Link>
+            
+            <Nav.Link href="CodeEditor">Code Editor  </Nav.Link>
+            <Nav.Link href="OurTeam">Our Team</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
