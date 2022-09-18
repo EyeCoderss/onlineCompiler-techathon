@@ -24,7 +24,7 @@ function CodeEditor(){
     editorRef.current.setValue('');
   }
   function sendData() {
-    fetch('http://techathon-backend.herokuapp.com/code', {
+    fetch('http://techathon121.herokuapp.com/code', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ function CodeEditor(){
             <option selected value="c">c</option>
             <option value="cpp">c++</option>
             <option  value="python3">python3</option>
-            <option  value="java">java</option>
+            
         </select>
         <button className="submit" onClick={sendData}>Compile & Run</button>
         </div >
